@@ -6,14 +6,14 @@ module.exports = function antiBodyBlock(bigmeme) {
   let interval = null;
   let enabled = true;
 
-  partyObj.raid = true;
-
   const removeBodyBlock = () => {
-    for (let i = partyMembers.values(), step; !(step = i.next()).done; ) {
-      partyObj.gameId = step.value;
-      partyObj.partyId   = cache.partyId;
+    partyMembers.forEach(gameId => {
+      partyObj.gameId = gameId;
+      partyObj.partyId = cache.partyId;
+      partyObj.raid = true;
+
       bigmeme.send("S_PARTY_INFO", 2, partyObj);
-    }
+    })
   };
   
   bigmeme.game.on('enter_game', () => {
